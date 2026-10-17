@@ -1,7 +1,7 @@
 # opensearch-lab
 
 Learn OpenSearch by measuring it on its three main use cases: full-text search, log analytics,
-vector/hybrid search. Started 2026-10-17. Portfolio piece; docs stay plain-language for general readers.
+vector/hybrid search (+ key-value DBs). Trello #102 https://trello.com/c/2YogZt3j, from #4 item 9. Started 2026-10-17. Portfolio piece; docs stay plain-language for general readers.
 Plan: docs/ROADMAP.md. Open work: TODO.md.
 
 ## Run
