@@ -34,6 +34,8 @@ tuning, 300 kept aside for the final score). Each method returns its top 10 abst
   rewards putting them near the *top*; 1.0 is perfect.
 - "Every word must match" is Postgres's usual search-box setting. On real questions it found
   **nothing at all** for 274 of 300, because no abstract contains every word of a long question.
+![Title weight x field combination](reports/01_fig1.png)
+
 - **Tuning** tried 640 settings on the tuning questions only, then scored the test questions once:
   +0.079 (95% interval +0.055 to +0.105). The biggest lever was how much the title counts; the BM25
   parameters textbooks focus on (`k1`, `b`) barely mattered.
@@ -53,6 +55,8 @@ version of each).
 | Anomaly Detection plugin, 1-minute, grade ≥ 0.8 | 6 | 65 | 0 |
 | Anomaly Detection plugin, 5-minute, grade ≥ 0.8 | 6 | 10 | 2 |
 | Rules + 5-minute anomaly detection | **8** | 9 | 1 |
+
+![Incidents caught vs false alarms](reports/02_fig2.png)
 
 - A fixed "too little traffic" line misses the subtle outage; a rule that compares with the **normal
   traffic for that time of day** catches it.
