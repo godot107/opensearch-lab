@@ -1,0 +1,17 @@
+[project]
+name = "oslab"
+version = "0.1.0"
+description = "Learn OpenSearch by measuring it: full-text search, log analytics, and hybrid vector search"
+requires-python = ">=3.11"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = ["stack: needs the docker compose stack running (skipped otherwise)"]

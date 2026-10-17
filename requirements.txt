@@ -1,0 +1,4 @@
+opensearch-py>=3.0
+psycopg[binary]>=3.2
+numpy>=2.0
+pytest>=8.0
