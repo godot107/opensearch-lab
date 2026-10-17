@@ -1,23 +1,19 @@
 # TODO
 
-## Lesson 1: full-text search
-- [x] Docker stack, Postgres source of truth, sync to OpenSearch, BM25 vs Postgres baseline
-- [ ] Tune BM25 on the train split (fields type, title boost, analyzer); report test once
-- [ ] Search-app features: highlighting, fuzziness, synonyms, autocomplete, `explain`
-- [ ] Executed walkthrough notebook (notebooks/01_full_text.ipynb)
+All four lessons are built, scored and in executed notebooks (2026-10-17).
 
-## Lesson 2: log analytics
-- [ ] Synthetic log generator with injected incidents (known schedule = ground truth)
-- [ ] Fluent Bit service in docker-compose, data stream + ISM retention policy
-- [ ] Dashboards saved objects (export to repo), alerting monitor, anomaly detector
-- [ ] Score detection: incidents caught, time to detect, false alarms
+## Open
+- [ ] Proofread notebooks + README; blog post (suggested spine: lesson 2 "rules vs anomaly detection",
+      or lesson 1's "Postgres finds nothing for 274/300 questions")
+- [ ] Public/private decision, then push to github.com/godot107/opensearch-lab
+- [ ] Postgres any-word latency measured 39 ms on the first run and ~75-80 ms on every later run;
+      not caused by the vector column or table bloat (both tested). Unexplained; README says 40-80 ms.
+- [ ] Optional: per-endpoint threshold rules in lesson 2 (would likely catch the subtle checkout spike)
+- [ ] Optional: Dashboards saved objects exported to the repo (index pattern + a log dashboard)
+- [ ] Optional: Loghub HDFS (real labelled logs) as a second lesson-2 dataset
+- [ ] Optional: one lesson on a small managed AWS domain, torn down the same session (never Serverless)
 
-## Lesson 3: vector / hybrid
-- [ ] Export bge-large vectors from rag-bedrock-compare's Chroma store
-- [ ] knn_vector index, hybrid search pipeline; compare BM25 / vector / hybrid / pgvector
-
-## Lesson 4: key-value (proposed)
-- [ ] DynamoDB Local service; access-pattern table design; timings vs Postgres; change feed -> OpenSearch
-
-## Wrap-up
-- [ ] Blog post, public/private decision, push to github.com/godot107/opensearch-lab
+## Not done as planned
+- Lesson 2 used daily indices + Fluent Bit Logstash_Format rather than a data stream (simpler with
+  Fluent Bit 4.0; ISM retention still applies via ism_template).
+- Lesson 3's ANN check is trivially 1.0 at 5k docs; a larger corpus is needed to see HNSW trade-offs.

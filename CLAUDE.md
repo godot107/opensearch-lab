@@ -9,7 +9,11 @@ Plan: docs/ROADMAP.md. Open work: TODO.md.
 ```bash
 docker compose up -d                 # OpenSearch 3.1 :9200, Dashboards :5601, Postgres(pgvector) :5432
 source .venv/bin/activate            # own venv, CPU only
-python -m oslab load && python -m oslab sync && python -m oslab eval && python -m oslab report
+python -m oslab load && python -m oslab sync && python -m oslab tune && python -m oslab hybrid
+python -m oslab eval && python -m oslab report        # lessons 1 + 3
+python -m oslab logs; docker compose --profile logs up -d fluent-bit; python -m oslab detect   # lesson 2
+python -m oslab kv                                    # lesson 4
+python notebooks/build.py && (execute each notebook with nbconvert --execute --inplace)
 pytest -q                            # tests/test_stack.py skips when the stack is down
 ```
 
@@ -34,6 +38,19 @@ pytest -q                            # tests/test_stack.py skips when the stack 
 - `metrics.py` and `beir.py` are copied from rag-bedrock-compare so scores are comparable.
 
 ## Gotchas
+
+- `_msearch` can't take a named search pipeline (URL param or header line): hybrid uses parallel
+  single searches (`hybrid.search_many`).
+- Alerting and AD plugins: their config indices don't exist until the first monitor/detector, so
+  the first `_search` 404s (handled). AD results: `entity` is nested; aggregate on it and you get
+  nothing silently: page through hits instead (`detect.detector_results`).
+- AD (Random Cut Forest) is stochastic: re-runs of the same detector differ (1-min run caught 8/8 at
+  grade>0.4 once, 6/8 the next time). Results in results/ come from logs/ad_runs.json's runs.
+- AD historical analysis: ~2 min for 2 weeks x 6 endpoints at 1-min interval.
+- DynamoDB Local: `ddb().meta.client` is the resource's client and takes plain Python values, not
+  `{"S": ...}` typed values. Timings are the emulator's; only read units transfer to AWS.
+- Backend dispatch is by exact name (an `os-`/`pg-` prefix check once routed lesson-3 backends to
+  lesson-1 code and produced identical scores: check for that symptom).
 
 - `websearch_to_tsquery` ANDs every word: 274/300 SciFact queries return nothing. `search.PG_OR`
   rewrites the tsquery to OR; the query text stays a bind parameter.

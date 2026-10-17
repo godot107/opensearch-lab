@@ -1,0 +1,67 @@
+{
+  "detector": "rules+ad-5m",
+  "caught": 8,
+  "of": 8,
+  "caught_big": 4,
+  "caught_subtle": 4,
+  "median_minutes_to_detect": 1.0,
+  "false_alarms": 9,
+  "incidents": [
+    {
+      "kind": "cred_stuffing",
+      "severity": "subtle",
+      "start": "2026-10-06 22:40:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 0.0
+    },
+    {
+      "kind": "error_spike",
+      "severity": "big",
+      "start": "2026-10-09 05:03:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 7.0
+    },
+    {
+      "kind": "slow_search",
+      "severity": "subtle",
+      "start": "2026-10-09 12:15:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 0.0
+    },
+    {
+      "kind": "outage",
+      "severity": "big",
+      "start": "2026-10-09 21:21:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 2.0
+    },
+    {
+      "kind": "cred_stuffing",
+      "severity": "big",
+      "start": "2026-10-10 11:27:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 0.0
+    },
+    {
+      "kind": "error_spike",
+      "severity": "subtle",
+      "start": "2026-10-10 20:22:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 53.0
+    },
+    {
+      "kind": "slow_search",
+      "severity": "big",
+      "start": "2026-10-11 06:10:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 0.0
+    },
+    {
+      "kind": "outage",
+      "severity": "subtle",
+      "start": "2026-10-11 13:30:00+00:00",
+      "caught": true,
+      "minutes_to_detect": 4.0
+    }
+  ]
+}

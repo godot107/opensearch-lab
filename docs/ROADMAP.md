@@ -1,10 +1,13 @@
 # Roadmap
 
+All four lessons built and executed 2026-10-17; results in README.md and notebooks/.
+The plans below are kept as written, with what changed noted in TODO.md.
+
 Three lessons, one per thing OpenSearch is actually used for, plus a key-value lesson (Trello #4 item 9
 is "OpenSearch and key-value databases"). Each one runs on the local Docker
 stack, is scored against a known answer, and ends with "when would I *not* use OpenSearch for this?"
 
-## Lesson 1: Full-text search (started)
+## Lesson 1: Full-text search (done)
 
 **Question:** How much better is a real search engine than the database I already have?
 
@@ -21,7 +24,7 @@ stack, is scored against a known answer, and ends with "when would I *not* use O
   - A short look at analyzers with `_analyze`: what "english" does to a sentence.
 - Skills shown: mappings, analyzers, BM25, relevance evaluation, a source-of-truth → index sync.
 
-## Lesson 2: Log analytics
+## Lesson 2: Log analytics (done)
 
 **Question:** Can I find an incident in a pile of logs, and get alerted to it, before a user complains?
 
@@ -35,7 +38,7 @@ stack, is scored against a known answer, and ends with "when would I *not* use O
   how fast, and how many false alarms.
 - Skills shown: data streams, ISM, aggregations, Dashboards, alerting, anomaly detection.
 
-## Lesson 3: Vector and hybrid search
+## Lesson 3: Vector and hybrid search (done)
 
 **Question:** Does meaning-based search beat keyword search, and does combining them beat both?
 
@@ -47,7 +50,7 @@ stack, is scored against a known answer, and ends with "when would I *not* use O
 - Compare against rag-bedrock-compare's local-bge result (nDCG@10 0.744).
 - Skills shown: k-NN indexes, search pipelines, hybrid scoring, vector DB trade-offs.
 
-## Lesson 4: Key-value databases (proposed)
+## Lesson 4: Key-value databases (done)
 
 The backlog item is "OpenSearch and key-value databases (revisit SIADS 611)", so this lesson covers
 the other half.
