@@ -1,16 +1,16 @@
-"""python -m oslab fetch | load | sync | eval [--backend B] | report"""
+"""python -m oslab fetch | load | sync | tune | eval [--backend B] | report"""
 import argparse
 import json
 from pathlib import Path
 
-from oslab import beir, evaluate, search, stack, store, sync
+from oslab import beir, evaluate, search, stack, store, sync, tune
 
 DATASET = "scifact"
 
 
 def main(argv=None):
     p = argparse.ArgumentParser(prog="oslab")
-    p.add_argument("cmd", choices=["fetch", "load", "sync", "eval", "report"])
+    p.add_argument("cmd", choices=["fetch", "load", "sync", "tune", "eval", "report"])
     p.add_argument("--backend", choices=search.BACKENDS + ("all",), default="all")
     a = p.parse_args(argv)
 
@@ -24,6 +24,9 @@ def main(argv=None):
         print(f"postgres docs: {store.load(corpus)}")
     elif a.cmd == "sync":
         print(f"opensearch {sync.DOCS_INDEX}: {sync.rebuild()} docs")
+    elif a.cmd == "tune":
+        out, rows = tune.sweep()
+        print(json.dumps(out, indent=2))
     elif a.cmd == "eval":
         _, queries, qrels = beir.load(ds_dir)
         for b in search.BACKENDS if a.backend == "all" else (a.backend,):

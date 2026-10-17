@@ -1,0 +1,28 @@
+{
+  "config": {
+    "index": "tune-english-k0_9-b0_9",
+    "analyzer": "english",
+    "k1": 0.9,
+    "b": 0.9,
+    "type": "most_fields",
+    "title_boost": 0.5,
+    "tie_breaker": 0.0
+  },
+  "n_configs": 640,
+  "train": {
+    "baseline_ndcg@10": 0.6164753201225125,
+    "tuned_ndcg@10": 0.6988121684801823
+  },
+  "test": {
+    "baseline_ndcg@10": 0.6102550414053289,
+    "tuned_ndcg@10": 0.6896432718276124,
+    "tuned_minus_baseline": {
+      "mean_diff": 0.07938823042228339,
+      "ci95": [
+        0.05490425556074198,
+        0.10488520463706472
+      ],
+      "p_le_0": 0.0
+    }
+  }
+}
