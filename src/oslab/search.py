@@ -76,12 +76,14 @@ def pg(query, k=10, conn=None, mode="or"):
 
 
 def retriever(backend):
-    if backend.startswith("os-"):
+    if backend in ("os-bm25", "os-bm25-tuned"):
         client = stack.opensearch()
         cfg = tuned_config() if backend == "os-bm25-tuned" else BASELINE
         return lambda q, k: os_bm25(q, k, client=client, **cfg)
-    if backend.startswith("pg-"):
+    if backend in ("pg-and", "pg-or"):
         conn = stack.postgres()
         return lambda q, k: pg(q, k, conn=conn, mode=backend[3:])
     from oslab import hybrid  # lesson 3 backends
+    if backend not in hybrid.BACKENDS:
+        raise ValueError(f"unknown backend {backend}")
     return hybrid.retriever(backend)

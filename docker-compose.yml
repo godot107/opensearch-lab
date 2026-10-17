@@ -43,6 +43,25 @@ services:
       interval: 5s
       retries: 20
 
+  # Lesson 4 key-value store: AWS's official DynamoDB emulator (in-memory: data resets on restart).
+  dynamodb:
+    image: amazon/dynamodb-local:3.0.0
+    command: -jar DynamoDBLocal.jar -inMemory -sharedDb
+    ports: ["127.0.0.1:8000:8000"]
+
+  # Lesson 2 log shipper: `docker compose --profile logs up -d fluent-bit`
+  fluent-bit:
+    image: fluent/fluent-bit:4.0.3
+    profiles: ["logs"]
+    volumes:
+      - ./infra/fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro
+      - ./infra/fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf:ro
+      - ./logs:/logs:ro
+      - fb-state:/state
+    depends_on:
+      opensearch: { condition: service_healthy }
+
 volumes:
+  fb-state: {}
   os-data: {}
   pg-data: {}

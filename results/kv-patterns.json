@@ -1,0 +1,42 @@
+{
+  "table": {
+    "items": 50000,
+    "bytes": 3070813
+  },
+  "popular_doc": "7840442",
+  "patterns": [
+    {
+      "pattern": "get_doc",
+      "items": 1,
+      "read_units": 0.5,
+      "dynamodb_ms": 6.68,
+      "postgres_ms": 0.22,
+      "usd_per_million": 0.06
+    },
+    {
+      "pattern": "user_recent",
+      "items": 20,
+      "read_units": 0.5,
+      "dynamodb_ms": 7.76,
+      "postgres_ms": 0.14,
+      "usd_per_million": 0.06
+    },
+    {
+      "pattern": "readers_scan",
+      "items": 2087,
+      "read_units": 376.0,
+      "dynamodb_ms": 557.27,
+      "postgres_ms": 4.88,
+      "usd_per_million": 47.0
+    },
+    {
+      "pattern": "readers_gsi",
+      "items": 2087,
+      "read_units": 13.0,
+      "dynamodb_ms": 45.48,
+      "postgres_ms": null,
+      "usd_per_million": 1.62
+    }
+  ],
+  "price_verified": false
+}

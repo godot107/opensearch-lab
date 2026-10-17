@@ -1,0 +1,18 @@
+{
+  "initial": {
+    "dynamodb": 5183,
+    "opensearch": 5183,
+    "identical": true
+  },
+  "after_edit_delete": {
+    "dynamodb": 5182,
+    "opensearch": 5182,
+    "identical": true
+  },
+  "lag_ms": {
+    "p50": 18.041665491182357,
+    "p95": 48.36659535067176,
+    "max": 319.1987960017286,
+    "poll_every_ms": 200
+  }
+}

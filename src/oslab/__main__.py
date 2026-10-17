@@ -1,17 +1,17 @@
-"""python -m oslab fetch | load | sync | tune | eval [--backend B] | report"""
+"""python -m oslab fetch | load | sync | tune | hybrid | eval [--backend B] | report"""
 import argparse
 import json
 from pathlib import Path
 
-from oslab import beir, evaluate, search, stack, store, sync, tune
+from oslab import beir, evaluate, hybrid, search, stack, store, sync, tune
 
 DATASET = "scifact"
 
 
 def main(argv=None):
     p = argparse.ArgumentParser(prog="oslab")
-    p.add_argument("cmd", choices=["fetch", "load", "sync", "tune", "eval", "report"])
-    p.add_argument("--backend", choices=search.BACKENDS + ("all",), default="all")
+    p.add_argument("cmd", choices=["fetch", "load", "sync", "tune", "hybrid", "eval", "report"])
+    p.add_argument("--backend", choices=search.BACKENDS + hybrid.BACKENDS + ("all",), default="all")
     a = p.parse_args(argv)
 
     if a.cmd != "fetch" and a.cmd != "report" and not stack.is_up():
@@ -27,9 +27,13 @@ def main(argv=None):
     elif a.cmd == "tune":
         out, rows = tune.sweep()
         print(json.dumps(out, indent=2))
+    elif a.cmd == "hybrid":
+        print(f"{hybrid.INDEX}: {hybrid.build_index()} docs; pgvector rows: {hybrid.load_pgvector()}")
+        hybrid.create_pipelines()
+        print(json.dumps(hybrid.tune_weight()[1], indent=2))
     elif a.cmd == "eval":
         _, queries, qrels = beir.load(ds_dir)
-        for b in search.BACKENDS if a.backend == "all" else (a.backend,):
+        for b in search.BACKENDS + hybrid.BACKENDS if a.backend == "all" else (a.backend,):
             print(json.dumps(evaluate.run(b, queries, qrels)))
     elif a.cmd == "report":
         rows = [json.loads(f.read_text()) for f in sorted(Path("results").glob(f"{DATASET}-*.json"))]
