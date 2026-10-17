@@ -1,6 +1,7 @@
 # Roadmap
 
-Three lessons, one per thing OpenSearch is actually used for. Each one runs on the local Docker
+Three lessons, one per thing OpenSearch is actually used for, plus a key-value lesson (Trello #4 item 9
+is "OpenSearch and key-value databases"). Each one runs on the local Docker
 stack, is scored against a known answer, and ends with "when would I *not* use OpenSearch for this?"
 
 ## Lesson 1: Full-text search (started)
@@ -45,6 +46,20 @@ stack, is scored against a known answer, and ends with "when would I *not* use O
   for hybrid. Compare BM25, vector, hybrid, and pgvector on the same Postgres rows.
 - Compare against rag-bedrock-compare's local-bge result (nDCG@10 0.744).
 - Skills shown: k-NN indexes, search pipelines, hybrid scoring, vector DB trade-offs.
+
+## Lesson 4: Key-value databases (proposed)
+
+The backlog item is "OpenSearch and key-value databases (revisit SIADS 611)", so this lesson covers
+the other half.
+
+**Question:** When is a key-value store (DynamoDB) the right home for data, and what does it cost you?
+
+- Add DynamoDB Local to docker-compose. Store the same SciFact records keyed by id, plus a
+  "recently viewed by user" table designed around its access pattern (partition + sort key).
+- Show what's instant (get by key, query one partition) and what's painful (ad-hoc filters,
+  full scans, joins), timed against Postgres on the same data.
+- Keep OpenSearch in sync from a change feed (DynamoDB Streams pattern; locally a small poller).
+- Skills shown: key design, access-pattern-first modeling, eventual consistency, CDC into a search index.
 
 ## Later / optional
 

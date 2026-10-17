@@ -16,5 +16,8 @@
 - [ ] Export bge-large vectors from rag-bedrock-compare's Chroma store
 - [ ] knn_vector index, hybrid search pipeline; compare BM25 / vector / hybrid / pgvector
 
+## Lesson 4: key-value (proposed)
+- [ ] DynamoDB Local service; access-pattern table design; timings vs Postgres; change feed -> OpenSearch
+
 ## Wrap-up
 - [ ] Blog post, public/private decision, push to github.com/godot107/opensearch-lab
